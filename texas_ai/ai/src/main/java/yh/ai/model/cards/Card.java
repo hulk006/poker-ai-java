@@ -1,4 +1,4 @@
-package edu.ntnu.texasai.model.cards;
+package    yh.ai.model.cards;
 
 //一张牌的表示有花色 和大小
 public class Card implements Comparable<Card> 

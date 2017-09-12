@@ -1,4 +1,4 @@
-package edu.ntnu.texasai.model.cards;
+package    yh.ai.model.cards;
 //CardNumber是一个枚举，CardNunber（“2”，2）代表cardNUMBER two
 public enum CardNumber {
 	//利用CardNumber（ ）的构造方法来定义了 ，这么多的枚举变量
