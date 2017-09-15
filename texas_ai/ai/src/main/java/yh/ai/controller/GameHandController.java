@@ -81,7 +81,8 @@ this.opponentModeler = opponentModeler;
         gameHand.setShareCards(dealMsg.getComCards());
         gameHand.newBettingRound();//新建了一个betground
        
-        int toPlay = gameHand.getPlayersCount();//获得玩家数量
+       @SuppressWarnings("unused")
+	   int toPlay = gameHand.getPlayersCount();//获得玩家数量
         //玩家的盲注均为跟注状态，不影响机器人的决策
 	    int turn =  dealMsg.getBetRound();//从外界知道目前是第几轮下注 ,这里就默认第一轮
 	    int numberOfPlayersAtBeginningOfRound = gameHand.getPlayersCount();//本轮下注的玩家数，  

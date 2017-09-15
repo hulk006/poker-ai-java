@@ -1,14 +1,53 @@
-1、建立工程： 使用meaven 搭配 eplise 建立工程
+从源码编译和建立工程：
+工具： 使用meaven 搭配 eplise 建立工程
 安装java
 安装eplise
-安装maven 查看mvn --version
+安装maven
+ 查看mvn --version
 cd 到含有pom.xml的文件夹下面 Texas_ai/ai/目录下
 执行 mvn install(为了安装依赖包)
-利用eplise打开工程目录 
-会自动生成工程 和一个data文件加里面存储，数据库文件包括对手模型和概率计算
-data 数据库文件需要单独生成（5到8个小时）复制过去就可以了
+利用eplise打开工程目录 ，尝试运行，如果有问题尝试解决
 
+工程说明：
+文件中含有两个完整的工程,你需要分别建立他们:
+texas-holdem-poker-ai-master：
+是用来进行仿真的，主要用来生成手牌胜率表的数据库文件。他的4个main函数
+* Play [demo|phase1|phase2|phase3]. 模拟一局游戏的进行，参数可选，默认为demo ，详细信息去GameProperties.java查看
+ * RunPreFlopSimulator 
+ * RunModeler 用来生成手牌的数据库（需要5个小时以上的时间），可以生成2到10个人所有手牌的胜率。
+  会自动生成工程 和一个data文件加里面存储，数据库文件包括对手模型和概率计算
+  data 数据库文件需要单独生成（5到8个小时）复制过去就可以了
+ * PrintModeler & PrintPreFlop打印的主函数
+
+texas_ai工程：
+主要是服务器上运行的工程
+main函数在TCP包下面的receiveMsg下，用于接受消息，然后执行ai决策生成决策。
+它依赖于texas-holdem-poker-ai-master生成的数据库文件，（可以把使用texas-holdem-poker-ai-master生层的data文件夹拷贝的此目录下）
+可执行文件用此工程打包，texas_ai文件夹下的ai.jar工程，依赖于它现有的文件夹结构，尽量不要改变。
 可执行文件的ai.jar必须与data同级放置不然找不到数据库
+
+消息说明：*********************************************************************************************************************************
+IP地址为本机ip地址
+端口号：#define PORT 2024
+完整的接受消息格式为（末尾请加入\n换行符），顺序可以打乱，分割符不要出现错误：
+aiLevel:3;gameId:1111;blind:10,20;initialMoney:5000;players:1+1000+raise,2+2000+call;highBet:2500;aiSeat:5;aiChip:5000;gameHandNum:1;aiHoleCards:QD,QS;comCards:  ;betRound:10;bettingRoundName:preflop;canCheck:0;end;\n
+如果能够给出上述完整的信息是最好的，如果不能，支持缺少部分信息,必须的信息如下： "aiLevel:3;gameId:1111;blind:10,20;highBet:200;aiChip:50400;aiHoleCards:QS,QD;comCards:QS,QD，TS;canCheck:0;end;\n";
+
+aiLevel：ai的水平，1,2,3,4,（功能完全的ai等级）5，6可以使用但是不完善，智商水平没有测试，需要利用到历史的对局信息。
+gameId：游戏的id。
+blind：大小盲注，大盲在后顺序不能改变。
+initialMoney：初始的筹码
+players:1+1000+raise，2+2000+call在ai之前的所有玩家的动作，1代表座位号，1000代表剩余筹码，call代表加注动作
+highBet：当前最高注
+aiSeat：该ai的座位
+aiChip：该ai的剩余筹码
+gameHandNum：这次比赛第几次对局，
+aiHoleCards：手牌
+comCards：公牌
+betRound：该ai这一句比赛的第几次下注
+bettingRoundName：这轮下注的名称（可以不用）
+canCheck:能否看牌
+所有TCP的连接都是短连接
 
 
 

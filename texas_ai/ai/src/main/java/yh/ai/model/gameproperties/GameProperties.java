@@ -1,7 +1,6 @@
 package    yh.ai.model.gameproperties;
 //一场游戏的配置信息
 import    yh.ai.model.Player;
-import    yh.ai.TCP.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

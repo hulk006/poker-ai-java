@@ -6,7 +6,6 @@ import yh.ai.controller.PokerController;
 import yh.ai.dependencyinjection.GamePropertiesParameter;
 import yh.ai.dependencyinjection.LogLevel;
 import yh.ai.dependencyinjection.TexasModule;
-import yh.ai.TCP.ReceiveMsg;;
 //测试接口的类
 public class TestPlay {
 	//public ReceiveMsg receiveMsg = new ReceiveMsg();
@@ -18,8 +17,6 @@ public class TestPlay {
 		if (args.length == 1) { // 带有参数的
 			gameP = args[0];
 		}
-
-		
 		Injector injector = Guice.createInjector(new TexasModule(LogLevel.ALL, GamePropertiesParameter.fromString(gameP)));
 		PokerController pokerController = injector.getInstance(PokerController.class);
 		pokerController.play();

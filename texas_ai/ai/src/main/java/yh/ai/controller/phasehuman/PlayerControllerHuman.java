@@ -2,8 +2,6 @@ package    yh.ai.controller.phasehuman;
 import    yh.ai.controller.PlayerController;
 import    yh.ai.model.*;
 import    yh.ai.model.cards.Card;
-import    yh.ai.utils.Logger;
-
 import javax.inject.Inject;
 
 import java.io.BufferedReader;

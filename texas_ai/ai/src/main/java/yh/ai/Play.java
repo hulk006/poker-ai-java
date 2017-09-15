@@ -1,5 +1,5 @@
 package    yh.ai;
-
+//模拟打牌的的，不能使用
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import    yh.ai.controller.PokerController;
@@ -14,7 +14,6 @@ public class Play {
         if(args.length == 1){        //带有参数的
             gameP = args[0];
         }
-
         Injector injector = Guice.createInjector(new TexasModule(LogLevel.ALL, GamePropertiesParameter.fromString(gameP)));
 
         PokerController pokerController = injector.getInstance(PokerController.class);

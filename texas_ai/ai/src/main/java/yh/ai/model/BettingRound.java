@@ -25,6 +25,9 @@ public class BettingRound {
                 break;
             case RAISE:
                 placeBet(player, highestBet + gameProperties.getBigBlind());
+                break;
+		default:
+			break;
         }
 
         // Don't save context information for pre flop

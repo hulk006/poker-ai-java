@@ -6,9 +6,6 @@ import    yh.ai.model.Player;
 import    yh.ai.model.gameproperties.GameProperties;
 import    yh.ai.utils.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.inject.Inject;
 
 public class PokerController {

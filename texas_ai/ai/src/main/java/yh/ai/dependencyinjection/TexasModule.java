@@ -6,9 +6,6 @@ import    yh.ai.model.gameproperties.GameProperties;
 import    yh.ai.persistence.PersistenceModule;
 import    yh.ai.utils.Logger;
 
-import java.util.List;
-import java.util.Map;
-
 import javax.inject.Singleton;
 //主要总有是配置 接口与实现
 public class TexasModule extends AbstractModule {

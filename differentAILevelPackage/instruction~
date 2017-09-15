@@ -1,0 +1,5 @@
+data 使用来存储手牌强度的数据库文件，必须要有
+ai.jar为texas打包成的可执行文件
+如果直接通过java -jar ai.jar 运行需要进入到当前文件夹下
+startDifferentAiLevel.sh 为执行脚本
+

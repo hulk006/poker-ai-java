@@ -6,11 +6,8 @@ import    yh.ai.model.GameHand;
 import    yh.ai.model.Player;
 import    yh.ai.model.cards.Card;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.io.IOException;
 
 
 public abstract class PlayerController {

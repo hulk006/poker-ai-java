@@ -49,7 +49,8 @@ public class PlayerControllerPhaseIINormal extends PlayerControllerPhaseII {
         int myChip = dealMsg.getAiChip();
         float big = highBet/blind; //>20
         float high =  highBet/myChip ; //1/2
-        if( big >=  20|| high >=  1/2 )
+		System.out.println("等级2的胜率为：" +percentageOfWins);
+        if( (big >=  20.0)|| (high >=  0.5) )
         {
         	  if (percentageOfWins > 0.64)
                   return BettingDecision.CALL;
@@ -64,6 +65,7 @@ public class PlayerControllerPhaseIINormal extends PlayerControllerPhaseII {
         }
         else if (percentageOfWins < 0.45)
             return BettingDecision.FOLD;
+        
         return BettingDecision.CALL;
     }
 
@@ -78,7 +80,7 @@ public class PlayerControllerPhaseIINormal extends PlayerControllerPhaseII {
         int myChip = dealMsg.getAiChip();
         float big = highBet/blind; //>20
         float high =  highBet/myChip ; //1/2
-        if( big >=20|| high >= 1/2 )
+        if( (big >=20)|| (high >= 0.5) )
         {
             if (p > 0.8) {
                 return BettingDecision.CALL;

@@ -2,8 +2,6 @@ package    yh.ai.dependencyinjection;
 
 import    yh.ai.model.gameproperties.*;
 
-import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Provider;

@@ -1,8 +1,6 @@
 package yh.ai.model.gameproperties;
 
 import java.util.List;
-import java.util.Map;
-
 import javax.inject.Inject;
 
 import yh.ai.TCP.dealMsg;
@@ -13,8 +11,6 @@ import yh.ai.controller.phase2.PlayerControllerPhaseIINormal;
 import yh.ai.controller.phase3.PlayerControllerPhaseIIIAgressive;
 import yh.ai.controller.phase3.PlayerControllerPhaseIIIConservative;
 import yh.ai.controller.phasehuman.PlayerControllerHuman;
-import yh.ai.dependencyinjection.GamePropertiesParameter;
-import yh.ai.dependencyinjection.LogLevel;
 import yh.ai.model.Player;
 
 public class TestGameProperties extends GameProperties {
@@ -33,9 +29,6 @@ public class TestGameProperties extends GameProperties {
 		   //System.out.println(dealMsg.mapMsg.size());
 		   super(dealMsg.mapMsg);//设置玩多少局，携带金额，大小盲注。//得到消息
 		   List<Player> players = dealMsg.getPlayers();
-		   
-		   
-		   
 	        for (Player player:players)
 	        {
 	        	System.out.println("玩家"+player.getNumber()+player.getMoney());
@@ -55,10 +48,10 @@ public class TestGameProperties extends GameProperties {
 	        	  ai = new Player(dealMsg.getAiSeat(),dealMsg.getAiChip() ,playerControllerPhaseIBluff);
 	        	break;
 	        case 3:
-	        	  ai = new Player(dealMsg.getAiSeat(),dealMsg.getAiChip() ,playerControllerPhaseIIBluff);
+	            ai = new Player(dealMsg.getAiSeat(),dealMsg.getAiChip() ,playerControllerPhaseIINormal);
 	        	break;
 	        case 4:
-	               ai = new Player(dealMsg.getAiSeat(),dealMsg.getAiChip() ,playerControllerPhaseIINormal);
+	        	  ai = new Player(dealMsg.getAiSeat(),dealMsg.getAiChip() ,playerControllerPhaseIIBluff);
 	        	break;
 	        case 5:
 	               ai = new Player(dealMsg.getAiSeat(),dealMsg.getAiChip() ,playerControllerPhaseIIIConservative);
