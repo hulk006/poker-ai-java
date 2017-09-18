@@ -1,4 +1,7 @@
+Texas Hold’em AI
+=====================
 
+Technology used
 ---------------
 We used Java to develop our Texas Hold’em Simulator. More precisely, we chose Guice for dependency injection and H2, a free, lightweight embedded SQL database, to store and retrieve the data from the pre­flop simulation and the opponents model. Maven is also used to manage our dependencies for the project.
 
