@@ -1,0 +1,37 @@
+消息说明：*********************************************************************************************************************************
+IP地址为本机ip地址
+端口号：#define PORT 2024
+完整的接受消息格式为（****末尾请加入\n换行符****），顺序可以打乱，分割符不要出现错误：
+
+aiLevel:3;gameId:1111;blind:10,20;initialMoney:5000;players:1+1000+raise,2+2000+call;highBet:2500;aiSeat:5;aiChip:5000;gameHandNum:1;aiHoleCards:QD,QS;comCards:  ;betRound:10;bettingRoundName:preflop;canCheck:0;end;\n
+
+如果能够给出上述完整的信息是最好的，如果不能，支持缺少部分信息,必须的信息如下：
+
+ aiLevel:3;gameId:1111;blind:10,20;highBet:200;aiChip:50400;aiHoleCards:QS,QD;comCards:QS,QD，TS;canCheck:0;end;\n
+
+必备消息：
+aiLevel：ai的水平，1,2,3,4,（功能完全的ai等级）5，6可以使用但是不完善，智商水平没有测试，需要利用到历史的对局信息。
+gameId：游戏的id。
+blind：大小盲注，大盲在后顺序不能改变。
+aiChip:50400;
+aiHoleCards：手牌
+comCards：公牌
+highBet：当前最高注
+canCheck:能否看牌
+\n 换行符**
+
+
+不是必须的消息，程序会用默认值补全
+initialMoney：初始的筹码
+aiSeat：该ai的座位
+aiChip：该ai的剩余筹码
+gameHandNum：这次比赛第几次对局，
+betRound：该ai这一句比赛的第几次下注
+bettingRoundName：这轮下注的名称（可以不用）
+players:1+1000+raise，2+2000+call在ai之前的所有玩家的动作，1代表座位号，1000代表剩余筹码，call代表加注动作
+
+所有TCP的连接都是短连接
+
+
+
+

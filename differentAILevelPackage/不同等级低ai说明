@@ -1,0 +1,74 @@
+Level 1 normal：
+
+	正常策略：
+	pre_flop阶段(只有两张手牌情况)：
+
+		只根据自身牌的大小来决定下注，首先判断自己的手牌大小，只考虑是否为对子，两张牌大小情况：
+		判断：
+		如果手牌一对就加注，如果手牌的数字和相加大于16，就跟注
+		其他情况下都弃牌（几率比较大）
+
+	after_flop(大于等于3张公牌)：
+		高牌弃牌
+		大于顺子加注
+		大于高牌小于顺子就加注
+
+
+Level 2 Bluff：
+	咋胡策略：
+	preflop：
+		如果手牌是对子，加注
+		手牌的和小与8，两张小单牌，加注
+		两张牌的和大于16，就跟注
+		其他情况下弃牌
+	after_FLOP：
+		首先计算自己的牌型，
+		    如果是高牌就加注，30%
+		    如果牌型大于等于顺子也加注30%，5%ALLIN
+		    两对加注45，allin5%，弃牌50%
+		    否则就弃牌
+
+
+Level 3 normal：
+	preflop阶段：
+		胜率表是预先设计预先设计出来的一个数据库，从2到10个人的手牌胜率表（生成需要大概5到8个小时），通过sql查询
+		查胜率表，得到n个人情况下手牌的胜率HS;
+
+		有人allin或者有人下大注
+			只有当HS>0.63的时候才会跟注，注明AA的胜率为0.75
+		所有人都正常下注情况：
+			if (percentageOfWins > 0.6)   return BettingDecision.RAISE;
+			else if (percentageOfWins < 0.45) return BettingDecision.FOLD;
+			return BettingDecision.CALL;
+
+	after_flop 阶段：
+		由（手牌，公牌+玩家数量）计算手牌强度系数p
+		计算自己手牌的rank值
+			仿真建立一个对手
+		模拟多次计算胜率次数（这里不是很准）没有目前的AI的强度计算准确
+		胜率为： pow(num / den, numberOfPlayers);
+		对于p有一些经验处理：
+		1 、人越多会增加胜率（具体增加多少不知道，模仿别论文的做的）
+			p = p * (1 + gameHand.getPlayersCount() / 20);
+		2、如果是最后一轮就要坚持下去	
+			    p += 0.3;
+		       3、Lot of raises, be careful超过3个人有加注行为，那就小心一点。目前因为没有历史的消息，没有使用
+			    p -= 0.3;
+		如果有人下大注或者allin
+			当p>0.8的时候跟跟注
+		否则
+		if (p > 0.8) {
+			    return BettingDecision.RAISE;
+			} else if (p > 0.4 || canCheck(gameHand, player)) {
+			    return BettingDecision.CALL;
+			}
+			return BettingDecision.FOLD;
+
+Level 4 Bluff：
+	跟Level3类似，增加了小牌咋胡的机制，
+	HS<0.2 并且在postflop阶段咋胡
+	如果玩家比较少就加注
+
+Level 5 和6：
+	基于玩家的历史下注信息得到的，目前功能无法完全使用
+
